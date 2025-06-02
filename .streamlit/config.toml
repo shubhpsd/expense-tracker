@@ -1,0 +1,11 @@
+[theme]
+base="dark"
+primaryColor="#fe8019" # Gruvbox Orange for primary actions
+secondaryBackgroundColor="#3c3836" # Gruvbox Dark Gray (slightly lighter bg)
+backgroundColor="#282828" # Gruvbox Dark Background
+textColor="#ebdbb2" # Gruvbox Light Text
+font="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" # More modern font stack
+
+[mapbox]
+lightStyle = "mapbox://styles/mapbox/light-v10"
+darkStyle = "mapbox://styles/mapbox/dark-v10"
