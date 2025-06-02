@@ -363,7 +363,7 @@ def main():
     db_file = f"expenses_{username}.db"
     init_db(db_file)
 
-    tab_add, tab_dashboard, tab_budget = st.tabs(["Add New Expense", "View Dashboard", "Budget Management"])
+    tab_add, tab_dashboard, tab_budget, tab_delete_account = st.tabs(["Add New Expense", "View Dashboard", "Budget Management", "Delete Account"])
     
     with tab_add:
         d = st.date_input('Date', date.today())
@@ -596,18 +596,15 @@ def main():
         else:
             st.info("No expenses recorded yet. Add some expenses to see budget progress.")
 
-    # Add UI for deleting user account
-    st.markdown("---")
-    st.markdown("### Delete Account")
-    username_to_delete = st.text_input("Enter your username to delete your account:")
-    if st.button("Delete Account"):
-        if username_to_delete:
-            if delete_user_account(username_to_delete):
-                st.success("Account deleted successfully!")
-            else:
-                st.error("Failed to delete account. Please try again.")
-        else:
-            st.error("Please enter a username.")
+    with tab_delete_account:
+        st.write("## Delete Account")
+        st.warning("This action is irreversible. All your data will be permanently deleted.")
+        if st.button("Delete My Account"):
+            # Logic to delete user account and associated data
+            delete_user_account(username)
+            st.session_state.authenticated = False
+            st.session_state.username = ''
+            st.success("Your account has been deleted successfully.")
 
     st.markdown("---")
     st.markdown("**GitHub Repository:** [Personal Expense Tracker](https://github.com/shubhpsd/expense-tracker)")
