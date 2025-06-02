@@ -579,5 +579,9 @@ def main():
         else:
             st.info("No expenses recorded yet. Add some expenses to see budget progress.")
 
+    st.markdown("---")
+    st.markdown("**GitHub Repository:** [Personal Expense Tracker](https://github.com/shubhpsd/expense-tracker)")
+    st.markdown("**Made by:** Shubham Prasad")
+
 if __name__ == '__main__':
     main()
