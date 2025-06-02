@@ -131,6 +131,23 @@ def delete_budget_goal(db_file, category):
         conn.execute('DELETE FROM budget_goals WHERE category = ?', (category,))
         conn.commit()
 
+def delete_user_account(username):
+    try:
+        # Connect to the users database
+        conn = sqlite3.connect('users.db')
+        conn.execute('DELETE FROM users WHERE username = ?', (username,))
+        conn.commit()
+        conn.close()
+
+        # Delete the user's expense database file
+        user_db_file = f'expenses_{username}.db'
+        if os.path.exists(user_db_file):
+            os.remove(user_db_file)
+
+        return True
+    except Exception as e:
+        return False
+
 # Main app
 def main():
     # Apply dark mode theme directly
@@ -578,6 +595,19 @@ def main():
                         st.success(f"✅ {cat} spending is on track!")
         else:
             st.info("No expenses recorded yet. Add some expenses to see budget progress.")
+
+    # Add UI for deleting user account
+    st.markdown("---")
+    st.markdown("### Delete Account")
+    username_to_delete = st.text_input("Enter your username to delete your account:")
+    if st.button("Delete Account"):
+        if username_to_delete:
+            if delete_user_account(username_to_delete):
+                st.success("Account deleted successfully!")
+            else:
+                st.error("Failed to delete account. Please try again.")
+        else:
+            st.error("Please enter a username.")
 
     st.markdown("---")
     st.markdown("**GitHub Repository:** [Personal Expense Tracker](https://github.com/shubhpsd/expense-tracker)")
