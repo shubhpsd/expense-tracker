@@ -43,6 +43,10 @@ To deploy the app for free:
    - Select your repository and branch.
    - Specify `app.py` as the entry point.
 
+## App Link
+
+You can access the app here: [Personal Expense Tracker](https://track-expense.streamlit.app/)
+
 ## Notes
 - SQLite `.db` files are used for local storage. Changes made during runtime will not persist across app restarts if deployed on Streamlit Community Cloud.
 - For multi-user scalability, consider using a cloud database like Firebase or Supabase.
